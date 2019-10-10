@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>Mentor SignUp</title>
+<style type="text/css">
+  .container{
+    border:5px;
+  }
+  .jumbotron{
+    background-color: #DCC7AA;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+</style>
+  </head>
+
+<body>
+	<div class="jumbotron" style="text-align:center;color: aliceblue">
+  <h1>Welcome to the learning Dashboard:<div id="Name"></div></h1>
+</div>
+<button type="submit" class="btn btn-success" style="margin-right: 10px;" (click)="getAllTraining()">View Trainings</button>
+<button type="submit" class="btn btn-success" style="margin-right: 10px;" (click)="viewProfile()">View Profile</button>
+<button type="submit" class="btn btn-success" style="margin-right: 10px;"(click)="getAllPayment()" hidden>View Payment History</button>
+<button type="submit" class="btn btn-success" style="margin-right: 10px;"routerLink="/utraining" style="float:right;display:block;">Register for new course</button>
+
+
+
+  <div *ngIf=userProfileFlag class="container" style="margin-top: 50px; border: 2px solid black; width: 90% ">
+    <table class="table" >
+      <tbody>
+        <tr>
+          <th>Name : </th>
+          <td>{{userProfile.firstName}} {{userProfile.lastName}}</td>
+        </tr>
+        <tr>
+          <th>Email-id : </th>
+          <td>{{userProfile.email}}</td>
+        </tr>      
+        <tr>
+          <th>LinkedIn URL : </th>
+          <td>{{userProfile.linkedInUrl}}</td>
+        </tr>
+        <tr>
+          <th>Years Of Experience : </th>
+          <td>{{userProfile.yearsOfExperience}}</td>
+        </tr>
+        <tr>
+          <th>Contact Number : </th>
+          <td>{{userProfile.contactNumber}}</td>
+        </tr>      
+      </tbody>
+    </table>
+  </div>
+
+
+
+<div *ngIf=trainingListFlag>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Training Id</th>
+      <th>Progress</th>
+      <th>Commission Amount</th>
+      <th>Rating</th>
+      <th>Average Rating</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Amount Received</th>
+      <th>Technology Name</th>
+      <th>Skills</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trList of userTraining" >
+        <td>{{trList.trainingId}}</td>
+        <td><div class="progress">
+          <div class="progress-bar" role="progressbar" [style.width.%]="trList.progress" aria-valuemin="0" aria-valuemax="100" style="color:black;">{{trList.progress}}%</div>
+        </div></td>
+        <td>{{trList.CommissionAmount}}</td>
+        <td>{{trList.rating}}</td>
+        <td>{{trList.avgrating}}</td>
+        <td>{{trList.startDate}}</td>
+        <td>{{trList.endDate}}</td>
+        <td>{{trList.startTime}}</td>
+        <td>{{trList.endTime}}</td>
+        <td>{{trList.amtReceived}}</td>
+        <td>{{trList.technology.techName}}</td>
+        <td><ul *ngFor="let skillList of trList.skill"><li>{{skillList.skillName}}</li></ul></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+<div *ngIf=paymentListFlag>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Training Id</th>
+      <th>Progress</th>
+      <th>Commission Amount</th>
+      <th>Rating</th>
+      <th>Average Rating</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Amount Received</th>
+      <th>Technology Name</th>
+      <th>Skills</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trList of userPayment">
+        <td>{{trList.trainingId}}</td>
+        <td>{{trList.progress}}</td>
+        <td>{{trList.CommissionAmount}}</td>
+        <td>{{trList.rating}}</td>
+        <td>{{trList.avgrating}}</td>
+        <td>{{trList.startDate}}</td>
+        <td>{{trList.endDate}}</td>
+        <td>{{trList.startTime}}</td>
+        <td>{{trList.endTime}}</td>
+        <td>{{trList.amtReceived}}</td>
+        <td>{{trList.technology.techName}}</td>
+        <td *ngFor="let skillList of trList.skill">{{skillList.skillName}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <br/>
+  <button type="reset" class="btn btn-danger" routerLink="/login" style="margin:2% auto;display:block;">Logout</button>
+</div>
+
+
+

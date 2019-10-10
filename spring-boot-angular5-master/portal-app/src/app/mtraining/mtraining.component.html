@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<title>Training Search</title>
+<style type="text/css">
+
+  .container{
+    border:5px;
+  }
+  .jumbotron{
+    background-color: #DCC7AA;
+  }
+</style>
+  </head>
+
+<body>
+	<div class="jumbotron text-center">
+  <h1>Mentor Dashborad:<div id="MentorName"></div></h1>
+</div>
+
+<button type="button" class="btn btn-info" style="margin-right: 10px;" (click)="addTrainingMethod()">Create Training</button>
+<button type="button" class="btn btn-info" style="margin-right: 10px;" (click)="mentorList()">Current Trainings</button>
+<button type="button" class="btn btn-danger" style="margin-right: 10px;" (click)="ngOnInit()">Mentor Profile</button>
+<button type="button" class="btn btn-danger" style="margin-right: 10px;" (click)="removeTrainingMethod()" hidden>Remove Training</button>
+<button type="button" class="btn btn-danger" style="margin-right: 10px;" routerLink="/mlogin">LogOut</button>
+
+<div *ngIf=mentorFlag class="container" style="margin:2%;; border: 2px solid black; width: 90% ">
+  <table class="table" >
+    <tbody>
+      <tr>
+        <th>Name : </th>
+        <td>{{mentorData.name}}</td>
+      </tr>
+      <tr>
+        <th>Email-id : </th>
+        <td>{{mentorData.email}}</td>
+      </tr>      
+      <tr hidden>
+        <th>Linkedin ID : </th>
+        <td>{{mentorData.linkedInUrl}}</td>
+      </tr>
+      <tr>
+        <th>Years Of Experience : </th>
+        <td>{{mentorData.yearsOfExperience}}</td>
+      </tr>
+      <tr>
+        <th>Rating : </th>
+        <td>{{mentorData.ratings}}</td>
+      </tr>      
+    </tbody>
+  </table>
+</div>
+
+
+<div style="margin:10px;" *ngIf=addTrainingFlag style="margin:2%;">
+  <form name="form" method="POST">
+  <h4>MentoID</h4><input type="text" [(ngModel)]="addTraining.mentor.mentorId" name="mentorId" >
+
+  <h4>Progress</h4><input type="text" [(ngModel)]="addTraining.progress" name="techName" >
+
+  <h4>Commission Amount</h4><input type="text" [(ngModel)]="addTraining.CommissionAmount" name="CommissionAmount"  >
+
+  <h4>Rating</h4><input type="text" [(ngModel)]="addTraining.rating" name="rating" >
+
+  <h4>Average Rating</h4><input type="text" [(ngModel)]="addTraining.avgrating" name="avgrating"  >
+
+  <h4>Start Date</h4><input type="date" [(ngModel)]="addTraining.startDate" name="startDate" >
+
+  <h4>End Date</h4><input type="date" [(ngModel)]="addTraining.endDate" name="endDate"  >
+
+  <h4>Start Time</h4><input type="text" [(ngModel)]="addTraining.startTime" name="startTime" >
+
+  <h4>Enter Technology</h4>
+    <select name="technologyField" [(ngModel)]="addTraining.technology.technologyId" >
+      <option value="">--Select--</option>
+      <option *ngFor="let tech of technologyList" value="{{tech.technologyId}}">{{tech.techName}}</option>
+      </select>
+
+      <!-- <input type="text" [(ngModel)]="addTraining.technologyId" name="technologyId" > -->
+  <h4>End Time</h4><input type="text" [(ngModel)]="addTraining.endTime" name="endTime"  >
+  <h4>Add Skills</h4>
+  <select name="SkillField" id="selectedSkills" [(ngModel)]="addTraining.skill" multiple >
+      <option value="">--Select--</option>
+      <option *ngFor="let skill of skillList" [ngValue]="skill">{{skill.skillName}}</option>
+  </select>
+
+  <h4>Amount Received</h4><input type="text" [(ngModel)]="addTraining.amtReceived" name="amtReceived" >
+  
+  <br/>
+  <button type="button" class="btn btn-info" (click)="createTraining()" style="margin:10px;" >Add Training</button>
+</form>
+</div>
+
+<div *ngIf=removeTrainingFlag>
+  <h4 style="margin:10px">Enter Training ID:</h4> 
+  <input type="text" style="margin:10px" name="trainingId" [(ngModel)]="removeTraining.trainingId" ><button type="button" class="btn btn-danger" (click)="deleteTraining()">Delete training</button>  
+</div>
+
+<table class="table table-striped" *ngIf=trainingListFlag style="margin:2%;">
+    <thead>
+    <tr>
+      <th>Training Id</th>
+      <th>Progress</th>
+      <th>Commission Amount</th>
+      <th>Rating</th>
+      <th>Average Rating</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Amount Received</th>
+      <th>Technology Name</th>
+      <th>Skills</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trList of trainingList">
+        <td>{{trList.trainingId}}</td>
+        <td>{{trList.progress}}</td>
+        <td>{{trList.CommissionAmount}}</td>
+        <td>{{trList.rating}}</td>
+        <td>{{trList.avgrating}}</td>
+        <td>{{trList.startDate}}</td>
+        <td>{{trList.endDate}}</td>
+        <td>{{trList.startTime}}</td>
+        <td>{{trList.endTime}}</td>
+        <td>{{trList.amtReceived}}</td>
+        <td>{{trList.technology.techName}}</td>
+        <td *ngFor="let skillList of trList.skill">{{skillList.skillName}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+
+</body>

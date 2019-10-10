@@ -1,0 +1,46 @@
+<div class="col-md-6">
+<h2> User Details</h2>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th class="hidden">Id</th>
+    <th>FirstName</th>
+		<th>LastName</th>
+		<th>Email</th>
+		<th>Username</th>
+		<th>password</th>
+		<th>contactNumber</th>
+		<th>regcode</th>
+		<th>LinkedUrl</th>
+		<th>role</th>
+		<th>yearsofexperience</th>
+		<th>active</th>
+		<th>confirmedsignup</th>
+		<th>ResetPassword</th>
+		<th>ResetPasswordDate</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of user">
+      <td class="hidden">{{user.userId}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.userName}}</td>
+      <td>{{user.password}}</td>
+      <td>{{user.contactNumber}}</td>
+      <td>{{user.regCode}}</td>
+      <td>{{user.linkedinUrl}}</td>
+      <td>{{user.role}}</td>
+      <td>{{user.yearsOfExperience}}</td>
+      <td>{{user.active}}</td>
+      <td>{{user.confirmedSignUp}}</td>
+      <td>{{user.resetPassword}}</td>
+      <td>{{user.resetPasswordDate}}</td>
+    <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete User</button></td>
+  </tr>
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>Training Search</title>
+<style type="text/css">
+  .container{
+    border:5px;
+  }
+  .jumbotron{
+    background-color: #DCC7AA;
+  }
+</style>
+  </head>
+<body>
+	<div class="jumbotron">
+  <h1 style="text-align: center;">User Training Search</h1><br/>
+  
+</div>
+
+<h2 style="text-align:center;">Select one of the Below courses to start learning!</h2>
+<div class="container" style="margin-top: 50px; width: 90% ">
+  <table class="table">
+    <thead>
+      <tr>
+          <th>Training Id</th>
+          <th>Mentor Name</th>
+          <th>Progress</th>
+          <th>Commission Amount</th>
+          <th>Rating</th>
+          <th>Average Rating</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Technology Name</th>
+          <th>Skills</th>
+        <th>Register</th>
+      </tr>
+    </thead>
+    <tbody>
+          <tr *ngFor="let training of trainings">
+              <td >{{training.trainingId}}</td>
+              <td>{{training.mentor.name}}</td>
+              <td>{{training.progress}}</td>
+              <td>{{training.CommissionAmount}}</td>
+              <td>{{training.rating}}</td>
+              <td>{{training.avgrating}}</td>
+              <td>{{training.startDate}}</td>
+              <td>{{training.endDate}}</td>
+              <td>{{training.startTime}}</td>
+              <td>{{training.endTime}}</td>
+              <td>{{training.technology.techName}}</td>
+              <td ><ul *ngFor="let skillList of training.skill"><li>{{skillList.skillName}}</li></ul></td>
+        <td><button class="btn btn-success" (click)="register(training)" routerLink="/payment">Register</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br/>
+<div style="text-align: center;">
+<button type="submit" class="btn btn-primary" routerLink="/login">Logout</button>
+</div>
+<br/>
+<br/>
+</body>

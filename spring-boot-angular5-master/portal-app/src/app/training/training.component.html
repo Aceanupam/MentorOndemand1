@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>Training Search</title>
+<style type="text/css">
+  .container{
+    border:5px;
+  }
+  .jumbotron{
+    background-color: #DCC7AA;
+  }
+</style> 
+</head>
+<body>
+	<div class="jumbotron text-center">
+  <h1>TRAININGS</h1>
+</div>
+<h3>WELCOME To THE TRAININGS!</h3><br/>
+<button type="button" class="btn btn-info" (click)="searchByDate()" style="margin:10px;" >Search By Date</button>
+<table class="table table-striped" *ngIf=trainingListFlag>
+    <thead>
+    <tr>
+      <th>Training Id</th>
+      <th>Mentor Name</th>
+      <th>Progress</th>
+      <th>Commission Amount</th>
+      <th>Rating</th>
+      <th>Average Rating</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Amount Received</th>
+      <th>Technology Name</th>
+      <th>Skills</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let training of trainings">
+        <td>{{training.trainingId}}</td>
+        <td>{{training.mentor.name}}</td>
+        <td>{{training.progress}}</td>
+        <td>{{training.CommissionAmount}}</td>
+        <td>{{training.rating}}</td>
+        <td>{{training.avgrating}}</td>
+        <td>{{training.startDate}}</td>
+        <td>{{training.endDate}}</td>
+        <td>{{training.startTime}}</td>
+        <td>{{training.endTime}}</td>
+        <td>{{training.amtReceived}}</td>
+        <td>{{training.technology.techName}}</td>
+        <td *ngFor="let skillList of training.skill">{{skillList.skillName}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+<!-- <div style="margin:10px;"  >
+  <form method="POST">
+  <h4>Enter Technology Name</h4><input type="text" [(ngModel)]="addTechnology.techName" name="techName" >
+  <h4>Enter Description</h4><input type="text" [(ngModel)]="addTechnology.description" name="description" style=" height:100px; width :50%;" >
+  <br/>
+  <button type="button" class="btn btn-info" (click)="createTechnology()" style="margin:10px;" >Add Technology</button>
+</form>
+</div> -->
+
+
+<div style="margin:10px;" *ngIf=findTrainingByDateFlag>
+  <form method="POST">
+  <h4>Enter Start Date</h4><input type="date" [(ngModel)]="dateWiseTraining.startDate" name="startDate" >
+  <h4>Enter End Date</h4><input type="date" [(ngModel)]="dateWiseTraining.endDate" name="endDate" >
+  <br/>
+  <button type="button" class="btn btn-info" (click)="findTrainingByDate()" style="margin:10px;" >Search</button>
+</form>
+</div>
+
+
+<!-- <div *ngIf=removeTrainingFlag>
+  <h4 style="margin:10px">Enter Technology ID:</h4> 
+  <input type="text" style="margin:10px" name="trainingId" [(ngModel)]="training.trainingId" ><button type="button" class="btn btn-danger" (click)="deleteTraning()">Delete Technology</button>  
+</div> -->
+
+
+<table class="table table-striped" *ngIf=dateWiseTrainingListFlag>
+  <thead>
+  <tr>
+    <th>Training Id</th>
+    <th>Mentor Name</th>
+    <th>Progress</th>
+    <th>Commission Amount</th>
+    <th>Rating</th>
+    <th>Average Rating</th><!-- 
+    <th>Start Date</th>
+    <th>End Date</th> -->
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Amount Received</th>
+    <th>Technology Name</th>
+    <th>Skills</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let training of dateWiseTrainings">
+      <td>{{training.trainingId}}</td>
+      <td>{{training.mentor.name}}</td>
+      <td>{{training.progress}}</td>
+      <td>{{training.CommissionAmount}}</td>
+      <td>{{training.rating}}</td>
+      <td>{{training.avgrating}}</td><!-- 
+      <td>{{training.startDate}}</td>
+      <td>{{training.endDate}}</td> -->
+      <td>{{training.startTime}}</td>
+      <td>{{training.endTime}}</td>
+      <td>{{training.amtReceived}}</td>
+      <td>{{training.technology.techName}}</td>
+      <td *ngFor="let skillList of training.skill">{{skillList.skillName}}</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>

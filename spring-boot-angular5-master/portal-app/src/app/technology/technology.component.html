@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<title>Training Search</title>
+<style type="text/css">
+  .container{
+    border:5px;
+  }
+  .jumbotron{
+    background-color: #DCC7AA;
+  }
+</style> 
+</head>
+<body>
+	<div class="jumbotron text-center">
+  <h1>Administrator Dashboard</h1>
+</div>
+<h3>WELCOME ADMIN!</h3><br/>
+<button type="button" class="btn btn-info" style="margin-right: 10px;" (click)="userList()">User List</button>
+<button type="button" class="btn btn-info" style="margin-right: 10px;" (click)="mentorList()">Mentor List</button>
+<button type="button" class="btn btn-danger" style="margin-right: 10px;" (click)="removeUser()">Remove User</button>
+<button type="button" class="btn btn-danger" style="margin-right: 10px;" (click)="removeMentor()">Remove Mentor</button>
+<button type="button" class="btn btn-info" style="margin-right: 10px;" (click)="technologyList()">Technology List</button>
+<button type="button" class="btn btn-info" style="margin-right: 10px;" (click)="addNewTechnology()">Add Technology</button>
+<button type="button" class="btn btn-info" style="margin-right: 10px;" (click)="removeTechnology()">Remove Technolgy</button>
+
+<button type="button" class="btn btn-primary pull-center" style="float:center;" routerLink="/adminlogin">Logout</button>
+<div *ngIf=removeUserFlag>
+  <h4 style="margin:10px">Enter User ID:</h4> 
+  <input type="text" style="margin:10px" name="userId" [(ngModel)]="users.userId" ><button type="button" class="btn btn-danger" (click)="deleteUser()">Delete User</button>  
+</div>
+
+<table class="table table-striped" *ngIf=userFlag>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>FirstName</th>
+		<th>LastName</th>
+		<th>Email</th>
+		<th>Username</th>
+		<th>password</th>
+		<th>contactNumber</th>
+		<th>regcode</th>
+		<th>LinkedUrl</th>
+		<th>role</th>
+		<th>yearsofexperience</th>
+		<th>active</th>
+		<th>confirmedsignup</th>
+		<th>ResetPassword</th>
+		<th>ResetPasswordDate</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.userId}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.userName}}</td>
+      <td>{{user.password}}</td>
+      <td>{{user.contactNumber}}</td>
+      <td>{{user.regCode}}</td>
+      <td>{{user.linkedinUrl}}</td>
+      <td>{{user.role}}</td>
+      <td>{{user.yearsOfExperience}}</td>
+      <td>{{user.active}}</td>
+      <td>{{user.confirmedSignUp}}</td>
+      <td>{{user.resetPassword}}</td>
+      <td>{{user.resetPasswordDate}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf=removeMentorFlag>
+  <h4 style="margin:10px">Enter Mentor ID:</h4> 
+  <input type="text" style="margin:10px" name="userId" [(ngModel)]="mentors.mentorId" ><button type="button" class="btn btn-danger" (click)="deleteMentor()">Delete User</button>  
+</div>
+
+<table class="table table-striped" id="mentorTable" *ngIf=mentorFlag>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+		<th>Username</th>
+    <th>password</th>
+    <th>Email</th>
+    <th>yearsofexperience</th>
+    <th>LinkedUrl</th>
+    <th>Time Zone</th>
+    <th>Ratings</th>
+    <th>Mentor Profile</th>
+		</tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mentor of mentors">
+      <td>{{mentor.mentorId}}</td>
+      <td>{{mentor.name}}</td>
+      <td>{{mentor.userName}}</td>
+      <td>{{mentor.password}}</td>
+      <td>{{mentor.email}}</td>
+      <td>{{mentor.yearsOfExperience}}</td>
+      <td>{{mentor.linkedinUrl}}</td>
+      <td>{{mentor.timeZone}}</td>
+      <td>{{mentor.ratings}}</td>
+      <td>{{mentor.mentorProfile}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="margin:10px;" *ngIf=addTechnologyFlag >
+  <form method="POST">
+  <h4>Enter Technology Name</h4><input type="text" [(ngModel)]="addTechnology.techName" name="techName" >
+  <h4>Enter Description</h4><input type="text" [(ngModel)]="addTechnology.description" name="description" style=" height:100px; width :50%;" >
+  <br/>
+  <button type="button" class="btn btn-info" (click)="createTechnology()" style="margin:10px;" >Add Technology</button>
+</form>
+</div>
+
+
+
+<div *ngIf=removeTechnologyFlag>
+  <h4 style="margin:10px">Enter Technology ID:</h4> 
+  <input type="text" style="margin:10px" name="technologyId" [(ngModel)]="technology.technologyId" ><button type="button" class="btn btn-danger" (click)="deleteTechnology()">Delete Technology</button>  
+</div>
+
+<table class="table table-striped" *ngIf=technologyFlag>
+  <thead>
+    <th>Technolgy Id</th>
+    <th>Technology Name</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let technology of technology">
+      <td>{{technology.technologyId}}</td>
+      <td>{{technology.techName}}</td>
+      <td>{{technology.description}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</body>
